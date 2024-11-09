@@ -57,6 +57,17 @@ public class MainActivity extends AppCompatActivity implements FlashCardAdapter.
     }
 
     @Override
+    public void onFullScreen(int position) {
+        // Get the flashcard at the clicked position
+        FlashCard flashCard = flashCardList.get(position);
+
+        // You can open a new activity and pass the data to show the full flashcard in full screen
+        Intent intent = new Intent(this, FullScreenFlashCardActivity.class);
+        intent.putExtra("question", flashCard.getQuestion());
+        intent.putExtra("answer", flashCard.getAnswer());
+        startActivity(intent);
+    }
+    @Override
     public void onEdit(int position) {
         // Handle editing the flashcard
     }
@@ -71,13 +82,5 @@ public class MainActivity extends AppCompatActivity implements FlashCardAdapter.
         // Handle flashcard click (e.g., flip animation)
     }
 
-    @Override
-    public void onFullScreen(int position) {
-        // Open a full-screen view of the flashcard
-        FlashCard flashCard = flashCardList.get(position);
-        Intent intent = new Intent(MainActivity.this, FullScreenActivity.class);
-        intent.putExtra("question", flashCard.getQuestion());
-        intent.putExtra("answer", flashCard.getAnswer());
-        startActivity(intent);
-    }
+
 }

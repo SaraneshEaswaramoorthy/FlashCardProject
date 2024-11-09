@@ -69,9 +69,13 @@ public class FlashCardAdapter extends RecyclerView.Adapter<FlashCardAdapter.Flas
         holder.editButton.setOnClickListener(v -> listener.onEdit(position));
         holder.deleteButton.setOnClickListener(v -> listener.onDelete(position));
 
-        // Full Screen Button listener
-        holder.fullScreenButton.setOnClickListener(v -> listener.onFullScreen(position));
+        // Full-Screen Button listener
+        holder.fullScreenButton.setOnClickListener(v -> {
+            // Handle full-screen action
+            listener.onFullScreen(position); // Pass the position to handle it in the activity or fragment
+        });
     }
+
 
     @Override
     public int getItemCount() {
