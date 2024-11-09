@@ -1,6 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@color/light_green">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Flashcard FrameLayout (holds both question and answer) -->
+    <FrameLayout
+        android:id="@+id/flashCardFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Flashcard Question -->
+        <TextView
+            android:id="@+id/tvFlashCardQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flash Card Question"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:visibility="visible" /> <!-- Default is visible -->
+
+        <!-- Flashcard Answer (Initially Hidden) -->
+        <TextView
+            android:id="@+id/tvFlashCardAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flash Card Answer"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:visibility="gone" /> <!-- Initially hidden -->
+    </FrameLayout>
+
+    <!-- Edit and Delete Buttons -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:paddingTop="8dp">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>
