@@ -1,0 +1,24 @@
+<!-- activity_full_screen.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvFullScreenQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Full Screen Question"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvFullScreenAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Full Screen Answer"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp" />
+</LinearLayout>

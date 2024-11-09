@@ -1,16 +1,17 @@
 package com.example.flashcardproject;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements FlashCardAdapter.OnFlashCardInteractionListener {
 
     private ArrayList<FlashCard> flashCardList;
@@ -34,18 +35,15 @@ public class MainActivity extends AppCompatActivity implements FlashCardAdapter.
     }
 
     private void addNewFlashCard() {
-        // Create a dialog to add a new flashcard
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add New FlashCard");
 
-        // Set up the input fields
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_flashcard, null);
         EditText inputQuestion = dialogView.findViewById(R.id.inputQuestion);
         EditText inputAnswer = dialogView.findViewById(R.id.inputAnswer);
 
         builder.setView(dialogView);
         builder.setPositiveButton("Add", (dialog, which) -> {
-            // Add flashcard to the list and update adapter
             String question = inputQuestion.getText().toString();
             String answer = inputAnswer.getText().toString();
             if (!question.isEmpty() && !answer.isEmpty()) {
@@ -60,41 +58,26 @@ public class MainActivity extends AppCompatActivity implements FlashCardAdapter.
 
     @Override
     public void onEdit(int position) {
-        // Show a dialog to edit the flashcard
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Edit FlashCard");
-
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_flashcard, null);
-        EditText inputQuestion = dialogView.findViewById(R.id.inputQuestion);
-        EditText inputAnswer = dialogView.findViewById(R.id.inputAnswer);
-
-        // Set existing values
-        inputQuestion.setText(flashCardList.get(position).getQuestion());
-        inputAnswer.setText(flashCardList.get(position).getAnswer());
-
-        builder.setView(dialogView);
-        builder.setPositiveButton("Update", (dialog, which) -> {
-            String question = inputQuestion.getText().toString();
-            String answer = inputAnswer.getText().toString();
-            if (!question.isEmpty() && !answer.isEmpty()) {
-                flashCardList.get(position).setQuestion(question);
-                flashCardList.get(position).setAnswer(answer);
-                flashCardAdapter.notifyItemChanged(position);
-            }
-        });
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-        builder.show();
+        // Handle editing the flashcard
     }
 
     @Override
     public void onDelete(int position) {
-        new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to delete this flash card?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    flashCardList.remove(position);
-                    flashCardAdapter.notifyItemRemoved(position);
-                })
-                .setNegativeButton("No", null)
-                .show();
+        // Handle deleting the flashcard
+    }
+
+    @Override
+    public void onFlashCardClick(int position) {
+        // Handle flashcard click (e.g., flip animation)
+    }
+
+    @Override
+    public void onFullScreen(int position) {
+        // Open a full-screen view of the flashcard
+        FlashCard flashCard = flashCardList.get(position);
+        Intent intent = new Intent(MainActivity.this, FullScreenActivity.class);
+        intent.putExtra("question", flashCard.getQuestion());
+        intent.putExtra("answer", flashCard.getAnswer());
+        startActivity(intent);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.flashcardproject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,8 @@ public class FlashCardAdapter extends RecyclerView.Adapter<FlashCardAdapter.Flas
     public interface OnFlashCardInteractionListener {
         void onEdit(int position);
         void onDelete(int position);
+        void onFlashCardClick(int position); // New method to handle flashcard flips
+        void onFullScreen(int position); // New method to handle full-screen button click
     }
 
     public FlashCardAdapter(ArrayList<FlashCard> flashCardList, OnFlashCardInteractionListener listener) {
@@ -59,11 +60,17 @@ public class FlashCardAdapter extends RecyclerView.Adapter<FlashCardAdapter.Flas
                 Animation flipOut = AnimationUtils.loadAnimation(v.getContext(), R.anim.flip_out);
                 holder.flashCardFrame.startAnimation(flipOut);
             }
+
+            // Trigger onFlashCardClick to handle the click
+            listener.onFlashCardClick(position);
         });
 
         // Edit and Delete Button listeners
         holder.editButton.setOnClickListener(v -> listener.onEdit(position));
         holder.deleteButton.setOnClickListener(v -> listener.onDelete(position));
+
+        // Full Screen Button listener
+        holder.fullScreenButton.setOnClickListener(v -> listener.onFullScreen(position));
     }
 
     @Override
@@ -76,7 +83,8 @@ public class FlashCardAdapter extends RecyclerView.Adapter<FlashCardAdapter.Flas
         private final TextView answerTextView;
         private final Button editButton;
         private final Button deleteButton;
-        private final FrameLayout flashCardFrame;
+        private final Button fullScreenButton; // Full screen button
+        private final FrameLayout flashCardFrame; // FrameLayout for flip effect
 
         public FlashCardViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +92,7 @@ public class FlashCardAdapter extends RecyclerView.Adapter<FlashCardAdapter.Flas
             answerTextView = itemView.findViewById(R.id.tvFlashCardAnswer);
             editButton = itemView.findViewById(R.id.btnEdit);
             deleteButton = itemView.findViewById(R.id.btnDelete);
+            fullScreenButton = itemView.findViewById(R.id.btnFullScreen); // Initialize the button
             flashCardFrame = itemView.findViewById(R.id.flashCardFrame); // Correct ID for FrameLayout
         }
     }

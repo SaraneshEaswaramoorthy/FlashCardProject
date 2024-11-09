@@ -1,0 +1,29 @@
+<!-- activity_full_screen_flashcard.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Question TextView -->
+    <TextView
+        android:id="@+id/tvFullScreenQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Full Screen Question"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Answer TextView -->
+    <TextView
+        android:id="@+id/tvFullScreenAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvFullScreenQuestion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Full Screen Answer"
+        android:textSize="22sp" />
+</RelativeLayout>
